@@ -1,0 +1,12 @@
+ssg-deploy-stage:
+  stage: deploy
+  script:
+  - echo $JOB_START
+  - sudo scp -P 10040 -i /home/kecpadmin/.ssh/id_rsa /home/kecpadmin/result/ROOT.war kecpadmin@10.100.12.83:/home/kecpadmin
+  - sudo ssh -p 10040 -i /home/kecpadmin/.ssh/id_rsa kecpadmin@10.100.12.83 'sudo cp /home/kecpadmin/ROOT.war /var/lib/tomcat/webapps'
+  - sudo ssh -p 10040 -i /home/kecpadmin/.ssh/id_rsa kecpadmin@10.100.12.83 'sudo systemctl restart tomcat'
+  - sudo ssh -p 10040 -i /home/kecpadmin/.ssh/id_rsa kecpadmin@10.100.12.83 'sudo systemctl status tomcat'
+  tags:
+    - shared-runner1
+  only:
+    - main

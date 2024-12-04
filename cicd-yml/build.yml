@@ -1,0 +1,14 @@
+ssg-build-job:
+  stage: build
+  script:
+    - echo $JOB_START
+    - hostname -I
+    - cd ROOT
+    - jar cvf ROOT.war *
+    - ls -al
+    - sudo cp ROOT.war /home/kecpadmin/result/ROOT.war
+    - echo $JOB_END
+  only:
+    - dev
+  tags:
+    - shared-runner1

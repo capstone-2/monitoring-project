@@ -1,0 +1,8 @@
+variables:
+  TARGET_PROJECT: "KIMSOL/cloud-monitoring"
+  
+  GITLAB_API_TOKEN: "glpat-7gNgD2gAJwgeKHuRQyxn"
+  PROGRESS: "============================"
+  ERROR_MSG: " !!!! Error occurred !!!! "
+  JOB_START: " $PROGRESS $CI_JOB_STAGE start $PROGRESS "
+  JOB_END: " $PROGRESS $CI_JOB_STAGE end $PROGRESS "
