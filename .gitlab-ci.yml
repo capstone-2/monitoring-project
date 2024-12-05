@@ -1,10 +1,12 @@
 stages:
+  - clone
   - build
   - test
   - deploy
-  - clone
+
 
 include:
+  - local: 'cicd-yml/clone.yml'
   - local: 'cicd-yml/build.yml'
   - local: 'cicd-yml/test.yml'
   - local: 'cicd-yml/deploy.yml'
