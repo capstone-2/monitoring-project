@@ -3,6 +3,7 @@ ssg-build-job!:
   variables:
     GIT_STRATEGY: none
   script:
+    - git status
     - git remote set-url origin http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
     - git fetch --all
     - git checkout dev
