@@ -1,24 +1,32 @@
+# TESTING JOB
 monitoring-testing-job:
   stage: test
   variables:
+    # 초기 clone 작업을 하지 않음
     GIT_STRATEGY: none
   script:
     - echo $JOB_START
     - hostname -I
+      # build 에서 clone 받은 reposiroty의 프로젝트 경로로 이동
     - cd cloud-monitoring
     - ls -al
+      # README.md 파일 출력 대신 TESTNG 작업을 작성
     - cat README.md
     - echo $JOB_END
   only:
+    # dev branch의 변화가 생길때 실행되는 job
     - dev
   tags:
+    # 10.100.22.34 서버에 설치된 project-runner의 tag명
     - monitoring-cicd
 
 monitoring-test-ok:
   stage: test
   variables:
+    # 초기 clone 작업을 하지 않음
     GIT_STRATEGY: none
   script:
+    # TESTING 작업이 통과되면 API 호출을 통해 Merge Request를 생성하는 코드.
     - echo
     - |
      curl --request POST --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
@@ -26,11 +34,15 @@ monitoring-test-ok:
       --form "target_branch=main" \
       --form "title=CICD Merge Request test" \
       http://10.99.2.66:19494/api/v4/projects/$CI_PROJECT_ID/merge_requests
+    # pipline에서 ok 버튼을 눌러야 "montoring-test-ok" job이 실행되도록 "manual" 설정
   when: manual
   needs:
+    # "monitoring-testing-job"이 실패하지 않아야 실행
     - job: monitoring-testing-job
       optional: false
   only:
+    # dev branch의 변화가 생길때 실행되는 job
     - dev
   tags:
+    # 10.100.22.34 서버에 설치된 project-runner의 tag명
     - monitoring-cicd
