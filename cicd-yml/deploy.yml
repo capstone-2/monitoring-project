@@ -7,6 +7,6 @@ ssg-deploy-stage:
   - sudo ssh -p 10040 -i /home/kecpadmin/.ssh/id_rsa kecpadmin@10.100.12.83 'sudo systemctl restart tomcat'
   - sudo ssh -p 10040 -i /home/kecpadmin/.ssh/id_rsa kecpadmin@10.100.12.83 'sudo systemctl status tomcat'
   tags:
-    - shared-runner1
+    - monitoring-cicd
   only:
     - main

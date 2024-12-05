@@ -1,4 +1,4 @@
-ssg-build-job:
+ssg-build-job!:
   stage: build
   script:
     - echo $JOB_START
@@ -7,4 +7,4 @@ ssg-build-job:
   only:
     - dev
   tags:
-    - shared-runner1
+    - monitoring-cicd
