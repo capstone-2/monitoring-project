@@ -7,7 +7,10 @@ monitoring-deploy-job:
   - hostname -I
   - ls -al
     # "npm start!!!! 출력대신 서버에서 배포 작업 시행"
-  - echo "npm start!!!!"
+  - pm2 stop uptime-kuma
+  - pm2 list
+  - pm2 start npm --name uptime-kuma -- run start
+  - pm2 list
   - echo $JOB_END
   tags:
     # 10.100.22.34 서버에 설치된 project-runner의 tag명

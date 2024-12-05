@@ -11,7 +11,7 @@ monitoring-testing-job:
     - cd cloud-monitoring
     - ls -al
       # README.md 파일 출력 대신 TESTNG 작업을 작성
-    - cat README.md
+    - echo "test!!!!!"
     - echo $JOB_END
   only:
     # dev branch의 변화가 생길때 실행되는 job
