@@ -1,0 +1,12 @@
+ssg-deploy-stage!:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+  - echo $JOB_START
+  - hostname -I
+  - ls -al
+  tags:
+    - monitoring-cicd
+  only:
+    - main

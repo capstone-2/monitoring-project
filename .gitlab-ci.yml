@@ -1,0 +1,10 @@
+stages:
+  - build
+  - test
+  - deploy
+
+include:
+  - local: 'cicd-yml/build.yml'
+  - local: 'cicd-yml/test.yml'
+  - local: 'cicd-yml/deploy.yml'
+  - local: 'cicd-yml/variables.yml'
