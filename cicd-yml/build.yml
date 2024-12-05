@@ -1,4 +1,4 @@
-ssg-build-job:
+ssg-build-job!:
   stage: build
   variables:
     GIT_STRATEGY: none
