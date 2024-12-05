@@ -1,8 +1,0 @@
-ssg-clone:
-  stage: clone
-  script:
-    - git clone http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git/
-  only:
-    - dev
-  tags:
-    - monitoring-cicd
