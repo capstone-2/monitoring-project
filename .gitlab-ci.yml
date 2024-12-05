@@ -3,11 +3,6 @@ stages:
   - test
   - deploy
 
-before_script:
-  - git remote set-url origin http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
-  - git fetch --all
-  - git checkout dev
-
 include:
   - local: 'cicd-yml/build.yml'
   - local: 'cicd-yml/test.yml'
