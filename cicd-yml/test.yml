@@ -11,7 +11,7 @@ monitoring-testing-job:
     - cd cloud-monitoring
     - ls -al
       # README.md 파일 출력 대신 TESTNG 작업을 작성
-    - cat README.md
+    - echo "test!!!!!"
     - echo $JOB_END
   only:
     # dev branch의 변화가 생길때 실행되는 job
@@ -32,7 +32,7 @@ monitoring-test-ok:
      curl --request POST --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
       --form "source_branch=dev" \
       --form "target_branch=main" \
-      --form "title=CICD Merge Request test" \
+      --form "title=Monitoring CICD Merge Request" \
       http://10.99.2.66:19494/api/v4/projects/$CI_PROJECT_ID/merge_requests
     # pipline에서 ok 버튼을 눌러야 "montoring-test-ok" job이 실행되도록 "manual" 설정
   when: manual

@@ -1,6 +1,8 @@
+# VARIABLES
 variables:
+  # 대상 프로젝트
   TARGET_PROJECT: "KIMSOL/cloud-monitoring"
-  
+  # API 호출을 위한 토큰 값 저장
   GITLAB_API_TOKEN: "glpat-7gNgD2gAJwgeKHuRQyxn"
   PROGRESS: "============================"
   ERROR_MSG: " !!!! Error occurred !!!! "
