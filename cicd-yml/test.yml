@@ -1,4 +1,4 @@
-ssg-testing-job!:
+ssg-testing-job1!:
   stage: test
   script:
     - echo $JOB_START
