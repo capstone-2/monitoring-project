@@ -4,8 +4,8 @@ ssg-build-job!:
     GIT_STRATEGY: none
   script:
     - git status
-    - git checkout dev
-    - git pull origin dev
+    - rm -rf cloud-monitoring
+    - git clone --branch dev http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
     - echo $JOB_START
     - hostname -I
     - ls -al
