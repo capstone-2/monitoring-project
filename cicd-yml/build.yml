@@ -1,0 +1,23 @@
+# BUILD JOB
+monitoring-build-job:
+  stage: build
+  variables:
+    # 러너가 설치된 서버에서 초기에 clone 작업을 진행하지 않도록 설정
+    # (러너가 인터넷망에 설치되어 있어 gitlab repository의 url이 다름)
+    GIT_STRATEGY: none
+  script:
+    - git status
+    # 기존의 repository를 삭제
+    - rm -rf cloud-monitoring
+    # dev 브랜치를 clone 받음
+    - git clone --branch dev http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
+    - echo $JOB_START
+    - hostname -I
+    - ls -al
+    - echo $JOB_END
+  only:
+    # dev branch의 변화가 생길때 실행되는 job
+    - dev
+  tags:
+    # 10.100.22.34 서버에 설치된 project-runner의 tag명
+    - monitoring-cicd
