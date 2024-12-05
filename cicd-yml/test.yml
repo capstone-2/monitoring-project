@@ -1,8 +1,11 @@
 ssg-testing-job1!!!:
   stage: test
+  variables:
+    GIT_STRATEGY: none
   script:
     - echo $JOB_START
     - hostname -I
+    - ls -al
     - |
      curl --request POST --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
       --form "source_branch=dev" \

@@ -8,6 +8,7 @@ ssg-build-job!!!!!:
     - git checkout dev
     - echo $JOB_START
     - hostname -I
+    - ls -al
     - echo $JOB_END
   only:
     - dev
