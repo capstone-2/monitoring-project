@@ -1,4 +1,4 @@
-ssg-deploy-stage!:
+monitoring-deploy-job:
   stage: deploy
   variables:
     GIT_STRATEGY: none
@@ -6,6 +6,7 @@ ssg-deploy-stage!:
   - echo $JOB_START
   - hostname -I
   - ls -al
+  - echo "npm start!!!!"
   tags:
     - monitoring-cicd
   only:
