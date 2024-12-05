@@ -5,9 +5,7 @@ ssg-build-job!:
   script:
     - git init
     - git status
-    - git remote set-url origin http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
-    - git fetch --all
-    - git checkout dev
+    - git clone --branch dev http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
     - echo $JOB_START
     - hostname -I
     - ls -al
