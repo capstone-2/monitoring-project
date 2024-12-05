@@ -1,4 +1,4 @@
-ssg-deploy-stage:
+ssg-deploy-stage!:
   stage: deploy
   script:
   - echo $JOB_START
