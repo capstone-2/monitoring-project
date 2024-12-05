@@ -3,7 +3,6 @@ ssg-build-job!!:
   variables:
     GIT_STRATEGY: none
   script:
-    - git init
     - git status
     - git pull
     - echo $JOB_START
