@@ -1,8 +1,10 @@
+# CICD MAIN YML FILE
 stages:
+# stages 3단계 구성
   - build
   - test
   - deploy
-
+# yml 파일 include
 include:
   - local: 'cicd-yml/build.yml'
   - local: 'cicd-yml/test.yml'
