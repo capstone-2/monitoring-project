@@ -6,6 +6,9 @@ ssg-testing-job1!!!:
     - echo $JOB_START
     - hostname -I
     - ls -al
+    - cd cloud-monitoring
+    - ls -al
+    - cat README.md
     - |
      curl --request POST --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
       --form "source_branch=dev" \
