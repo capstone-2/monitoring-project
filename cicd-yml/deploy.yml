@@ -8,7 +8,6 @@ monitoring-deploy-job:
   - pwd
   - ls -al
     # "npm start!!!! 출력대신 서버에서 배포 작업 시행"
-  - cd cloud-monitoring
   - npm run start
   tags:
     # 10.100.22.34 서버에 설치된 project-runner의 tag명
