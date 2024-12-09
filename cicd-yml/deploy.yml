@@ -9,6 +9,7 @@ monitoring-deploy-job:
   - ls -al
     # "npm start!!!! 출력대신 서버에서 배포 작업 시행"
   - cd cloud-monitoring
+  - pm2 stop cloud-monitoring
   - pm2 start server/server.js --name cloud-monitoring
   - pm2 save
   tags:
