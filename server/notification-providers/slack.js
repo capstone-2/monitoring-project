@@ -100,7 +100,10 @@ class Slack extends NotificationProvider {
                     });
                 });
             }
-
+            console.log("msg=========="+msg);
+            console.log("notification===========" + JSON.stringify(notification, null, 2));
+            console.log("monitorJSON===========" + JSON.stringify(monitorJSON, null, 2));
+            console.log("heartbeatJSON===========" + JSON.stringify(heartbeatJSON, null, 2));
             await axios.post(notification.slackwebhookURL, data);
             return okMsg;
         } catch (error) {
