@@ -8,7 +8,8 @@ class Kakao extends NotificationProvider {
 
     async send(notification, msg, monitorJSON = null, heartbeatJSON = null) {
 
-        const baseUrl = "https://kecp-biztalk.kdn.com:14343/sendKakao?";
+        const baseUrl = "http://10.100.21.128:17878/sendSms?";
+        //const baseUrl = "http://10.100.21.128:17878/sendSms?/sendKakao?";
 
         // let callBackNo = notification.biztalkCallBackNo
         // let sendNo = notification.biztalkSenderNo
@@ -18,6 +19,7 @@ class Kakao extends NotificationProvider {
         // let title = notification.biztalkTitleName
 
         let serviceStatus = "";
+        
         if (heartbeatJSON !== null) {
             //serviceStatus = (heartbeatJSON["status"] === DOWN) ? "🔴 Down" : "✅ Up";
             serviceStatus = (heartbeatJSON["status"] === DOWN) ? "서버가 다운되었습니다." : "서버가 정상적으로 기동중입니다.";
@@ -26,7 +28,9 @@ class Kakao extends NotificationProvider {
         const smsMsg = `${serviceStatus}\n${msg}`;
 
         // URL에 필요한 쿼리 파라미터
-        const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&tmplCode=${encodeURIComponent(notification.biztalkTemplateCode)}&title=${encodeURIComponent(notification.biztalkTitleName)}&content=${encodeURIComponent(smsMsg)}`;
+        const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(smsMsg)}`;
+        
+        //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&tmplCode=${encodeURIComponent(notification.biztalkTemplateCode)}&title=${encodeURIComponent(notification.biztalkTitleName)}&content=${encodeURIComponent(smsMsg)}`;
         
         
         console.log("msg===========");

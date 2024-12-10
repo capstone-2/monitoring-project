@@ -34,6 +34,7 @@ class Slack extends NotificationProvider {
 
         try {
             if (heartbeatJSON == null) {
+                console.log("hi=========");
                 let data = {
                     "text": msg,
                     "channel": notification.slackchannel,
