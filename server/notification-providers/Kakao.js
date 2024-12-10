@@ -12,8 +12,7 @@ class Kakao extends NotificationProvider {
         const baseUrl = "http://10.100.21.128:17878/sendSms";
         //const baseUrl = "http://10.100.21.128:17878/sendSms?/sendKakao?";
         
-        const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(smsMsg)}`;
-        
+
         try {
 
             if (heartbeatJSON !== null) {
@@ -74,7 +73,8 @@ class Kakao extends NotificationProvider {
                         ],
                     }],
                 };
-
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(kakaodowndata)}`;
+                console.log("kakaodowndata=========="+url);
                 kakaodowndata = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -110,7 +110,8 @@ class Kakao extends NotificationProvider {
                         ],
                     }],
                 };
-
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(kakaoupdata)}`;
+                console.log("kakaoupdata=========="+url);
                 kakaoupdata = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
