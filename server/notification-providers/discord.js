@@ -11,7 +11,6 @@ class Discord extends NotificationProvider {
 
         try {
             const discordDisplayName = notification.discordUsername || "Uptime Kuma";
-            console.log("discordDisplayName========="+ discordDisplayName);
 
             // If heartbeatJSON is null, assume we're testing.
             if (heartbeatJSON == null) {

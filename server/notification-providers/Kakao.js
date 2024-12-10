@@ -12,10 +12,13 @@ class Kakao extends NotificationProvider {
         const baseUrl = "http://10.100.21.128:17878/sendSms";
         //const baseUrl = "http://10.100.21.128:17878/sendSms?/sendKakao?";
         
-
         try {
 
+            const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(kakaodowndata)}`;
+            console.log("kakaodowndata=========="+url);
+
             if (heartbeatJSON !== null) {
+                
                 const kakaotestdata = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -121,9 +124,10 @@ class Kakao extends NotificationProvider {
                 return kakaoupdata.data;
             }
         } catch (error) {
-            this.throwGeneralAxiosError(error);
+            console.error("[Kakao Notification Error]:", error.message || error.response?.data);
+            throw new Error("Failed to send Kakao notification. Check the logs for more details.");
         }
     }
 }
 
-
+module.exports = Kakao;
