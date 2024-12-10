@@ -8,7 +8,7 @@ class Kakao extends NotificationProvider {
 
     async send(notification, msg, monitorJSON = null, heartbeatJSON = null) {
 
-        const baseUrl = "http://10.100.21.128:17878/sendSms?";
+        const baseUrl = "http://10.100.21.128:17878/sendSms";
         //const baseUrl = "http://10.100.21.128:17878/sendSms?/sendKakao?";
 
         // let callBackNo = notification.biztalkCallBackNo
@@ -19,7 +19,7 @@ class Kakao extends NotificationProvider {
         // let title = notification.biztalkTitleName
 
         let serviceStatus = "";
-        
+
         if (heartbeatJSON !== null) {
             //serviceStatus = (heartbeatJSON["status"] === DOWN) ? "🔴 Down" : "✅ Up";
             serviceStatus = (heartbeatJSON["status"] === DOWN) ? "서버가 다운되었습니다." : "서버가 정상적으로 기동중입니다.";
