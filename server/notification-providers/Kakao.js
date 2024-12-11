@@ -9,8 +9,11 @@ class Kakao extends NotificationProvider {
     async send(notification, msg, monitorJSON = null, heartbeatJSON = null) {
         let okMsg = "Sent Successfully.";
 
-        const baseUrl = "http://10.100.21.128:17878/sendSms";
-        //const baseUrl = "http://10.100.21.128:17878/sendSms?/sendKakao?";
+        // 문자
+        // const baseUrl = "http://10.100.21.128:17878/sendSms";
+        
+        // 카카오톡
+        const baseUrl = "http://10.100.21.128:17878/sendKakao";
         
         try {
 
@@ -27,7 +30,7 @@ class Kakao extends NotificationProvider {
                 });
                 return response.data;
             }
-            console.log("=====================33333333333333333");
+
             console.log("heartbeatJSON===========" + JSON.stringify(heartbeatJSON, null, 2));
             let address;
 
@@ -54,35 +57,53 @@ class Kakao extends NotificationProvider {
             // If heartbeatJSON is not null, we go into the normal alerting loop.
             if (heartbeatJSON["status"] === DOWN) {
                 console.log("상태 downdowndowndowndown================");
-                let kakaodowndata = {
-                    username: notification.name,
-                    embeds: [{
-                        title: "❌ Your service " + monitorJSON["name"] + " went down. ❌",
-                        color: 16711680,
-                        timestamp: heartbeatJSON["time"],
-                        fields: [
-                            {
-                                name: "Service Name",
-                                value: monitorJSON["name"],
-                            },
-                            {
-                                name: monitorJSON["type"] === "push" ? "Service Type" : "Service URL",
-                                value: monitorJSON["type"] === "push" ? "Heartbeat" : address,
-                            },
-                            {
-                                name: `Time (${heartbeatJSON["timezone"]})`,
-                                value: heartbeatJSON["localDateTime"],
-                            },
-                            {
-                                name: "Error",
-                                value: heartbeatJSON["msg"] == null ? "N/A" : heartbeatJSON["msg"],
-                            },
-                        ],
-                    }],
-                };
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
-                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(JSON.stringify(kakaodowndata))}`;
-                console.log("url======"+url);
+                // let kakaodowndata = {
+                //     username: notification.name,
+                //     embeds: [{
+                //         title: "❌ Your service " + monitorJSON["name"] + " went down. ❌",
+                //         color: 16711680,
+                //         timestamp: heartbeatJSON["time"],
+                //         fields: [
+                //             {
+                //                 name: "Service Name",
+                //                 value: monitorJSON["name"],
+                //             },
+                //             {
+                //                 name: monitorJSON["type"] === "push" ? "Service Type" : "Service URL",
+                //                 value: monitorJSON["type"] === "push" ? "Heartbeat" : address,
+                //             },
+                //             {
+                //                 name: `Time (${heartbeatJSON["timezone"]})`,
+                //                 value: heartbeatJSON["localDateTime"],
+                //             },
+                //             {
+                //                 name: "Error",
+                //                 value: heartbeatJSON["msg"] == null ? "N/A" : heartbeatJSON["msg"],
+                //             },
+                //         ],
+                //     }],
+                // };
+
+                let title= "❌ Your service " + monitorJSON["name"] + " went down. ❌";
+                let serviceName= monitorJSON["name"];
+                let serviceType = monitorJSON["type"] === "push" ? "Service Type" : "Service URL";
+                let Address= address;
+                let timezone = heartbeatJSON["timezone"];
+                let time = heartbeatJSON["localDateTime"];
+                let errorMsg= heartbeatJSON["msg"] == null ? "N/A" : heartbeatJSON["msg"];
+
+                // 문자
+                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
+                
+                
+                
+                // 카카오톡
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&title=TalkTest&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
+                         &projectId=${encodeURIComponent(notification.biztalkProjectId)}&tmplCode=AT_20241211130659&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
+                         &param1=${encodeURIComponent(title)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
+                         &param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(errorMsg)}`;
+                
+                         console.log("down======" + url);
                 const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -93,36 +114,54 @@ class Kakao extends NotificationProvider {
 
             } else if (heartbeatJSON["status"] === UP) {
                 console.log("상태 upupupupupupp================");
-                let kakaoupdata = {
-                    username: notification.name,
-                    embeds: [{
-                        title: "✅ Your service " + monitorJSON["name"] + " is up! ✅",
-                        color: 65280,
-                        timestamp: heartbeatJSON["time"],
-                        fields: [
-                            {
-                                name: "Service Name",
-                                value: monitorJSON["name"],
-                            },
-                            {
-                                name: monitorJSON["type"] === "push" ? "Service Type" : "Service URL",
-                                value: monitorJSON["type"] === "push" ? "Heartbeat" : address,
-                            },
-                            {
-                                name: `Time (${heartbeatJSON["timezone"]})`,
-                                value: heartbeatJSON["localDateTime"],
-                            },
-                            {
-                                name: "Ping",
-                                value: heartbeatJSON["ping"] == null ? "N/A" : heartbeatJSON["ping"] + " ms",
-                            },
-                        ],
-                    }],
-                };
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
+                // let kakaoupdata = {
+                //     username: notification.name,
+                //     embeds: [{
+                //         title: "✅ Your service " + monitorJSON["name"] + " is up! ✅",
+                //         color: 65280,
+                //         timestamp: heartbeatJSON["time"],
+                //         fields: [
+                //             {
+                //                 name: "Service Name",
+                //                 value: monitorJSON["name"],
+                //             },
+                //             {
+                //                 name: monitorJSON["type"] === "push" ? "Service Type" : "Service URL",
+                //                 value: monitorJSON["type"] === "push" ? "Heartbeat" : address,
+                //             },
+                //             {
+                //                 name: `Time (${heartbeatJSON["timezone"]})`,
+                //                 value: heartbeatJSON["localDateTime"],
+                //             },
+                //             {
+                //                 name: "Ping",
+                //                 value: heartbeatJSON["ping"] == null ? "N/A" : heartbeatJSON["ping"] + " ms",
+                //             },
+                //         ],
+                //     }],
+                // };
+
+                let title= "✅ Your service " + monitorJSON["name"] + " is up! ✅";
+                let serviceName= monitorJSON["name"];
+                let serviceType = monitorJSON["type"] === "push" ? "Service Type" : "Service URL";
+                let Address= address;
+                let timezone = heartbeatJSON["timezone"];
+                let time = heartbeatJSON["localDateTime"];
+                let passMsg = heartbeatJSON["ping"] == null ? "N/A" : heartbeatJSON["ping"] + " ms";
+
+                // 문자 
+                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
+                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&title=TalkTest&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&tmplCode=~~~~&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(JSON.stringify(kakaodowndata))}`;
                 
-                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${eencodeURIComponent(JSON.stringify(kakaoupdata))}`;
-                console.log("url======"+url);
+                
+                // 카카오톡
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
+                         &projectId=${encodeURIComponent(notification.biztalkProjectId)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
+                         &param1=${encodeURIComponent(title)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
+                         &param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
+
+                console.log("up======" + url);
+
                 const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
