@@ -57,33 +57,7 @@ class Kakao extends NotificationProvider {
             // If heartbeatJSON is not null, we go into the normal alerting loop.
             if (heartbeatJSON["status"] === DOWN) {
                 console.log("상태 downdowndowndowndown================");
-                // let kakaodowndata = {
-                //     username: notification.name,
-                //     embeds: [{
-                //         title: "❌ Your service " + monitorJSON["name"] + " went down. ❌",
-                //         color: 16711680,
-                //         timestamp: heartbeatJSON["time"],
-                //         fields: [
-                //             {
-                //                 name: "Service Name",
-                //                 value: monitorJSON["name"],
-                //             },
-                //             {
-                //                 name: monitorJSON["type"] === "push" ? "Service Type" : "Service URL",
-                //                 value: monitorJSON["type"] === "push" ? "Heartbeat" : address,
-                //             },
-                //             {
-                //                 name: `Time (${heartbeatJSON["timezone"]})`,
-                //                 value: heartbeatJSON["localDateTime"],
-                //             },
-                //             {
-                //                 name: "Error",
-                //                 value: heartbeatJSON["msg"] == null ? "N/A" : heartbeatJSON["msg"],
-                //             },
-                //         ],
-                //     }],
-                // };
-
+         
                 let title = 'TalkTest';
                 let content = 'Talk';
                 let msgTitle= "❌ Your service " + monitorJSON["name"] + " went down. ❌";
@@ -94,16 +68,15 @@ class Kakao extends NotificationProvider {
                 let time = heartbeatJSON["localDateTime"];
                 let errorMsg= heartbeatJSON["msg"] == null ? "N/A" : heartbeatJSON["msg"];
 
-                const sanitize = (str) => str.replace(/[^\x20-\x7E]/g, ''); // ASCII 범위만 허용
                 // 문자
                 //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
                 
                 // 카카오톡
                 //const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}&projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}&paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}&param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
-
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130659&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(errorMsg)}`;
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=${encodeURIComponent(notification.biztalkTemplateCode)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(errorMsg)}`;
                 
                 console.log("down======" + url);
+
                 const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -114,49 +87,20 @@ class Kakao extends NotificationProvider {
 
             } else if (heartbeatJSON["status"] === UP) {
                 console.log("상태 upupupupupupp================");
-                // let kakaoupdata = {
-                //     username: notification.name,
-                //     embeds: [{
-                //         title: "✅ Your service " + monitorJSON["name"] + " is up! ✅",
-                //         color: 65280,
-                //         timestamp: heartbeatJSON["time"],
-                //         fields: [
-                //             {
-                //                 name: "Service Name",
-                //                 value: monitorJSON["name"],
-                //             },
-                //             {
-                //                 name: monitorJSON["type"] === "push" ? "Service Type" : "Service URL",
-                //                 value: monitorJSON["type"] === "push" ? "Heartbeat" : address,
-                //             },
-                //             {
-                //                 name: `Time (${heartbeatJSON["timezone"]})`,
-                //                 value: heartbeatJSON["localDateTime"],
-                //             },
-                //             {
-                //                 name: "Ping",
-                //                 value: heartbeatJSON["ping"] == null ? "N/A" : heartbeatJSON["ping"] + " ms",
-                //             },
-                //         ],
-                //     }],
-                // };
 
                 let title = 'TalkTest';
                 let content = 'Talk';
-                //let msgTitle= "✅ Your service ${monitorJSON["name"]} is up! ✅";
-                let msgTitle = `Your service ${monitorJSON["name"]} is up!`; // 유니코드 제거
+                let msgTitle= "✅ Your service " + monitorJSON["name"] + " is up! ✅";
                 let serviceName= monitorJSON["name"];
                 let serviceType = monitorJSON["type"] === "push" ? "Service Type" : "Service URL";
                 let Address= address;
                 let timezone = heartbeatJSON["timezone"];
                 let time = heartbeatJSON["localDateTime"];
-                //let passMsg = heartbeatJSON["ping"] == null ? "N/A" : heartbeatJSON["ping"] + " ms";
-                let passMsg = heartbeatJSON["ping"] == null ? "N/A" : `${heartbeatJSON["ping"]} ms`;
+                let passMsg = heartbeatJSON["ping"] == null ? "N/A" : heartbeatJSON["ping"] + " ms";
 
                 // 문자 
                 //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
                 //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&title=TalkTest&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&tmplCode=~~~~&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(JSON.stringify(kakaodowndata))}`;
-                
                 
                 // 카카오톡
                 //const sanitize = (str) => str.replace(/[^\x20-\x7E]/g, ''); // ASCII 범위만 허용
@@ -164,7 +108,7 @@ class Kakao extends NotificationProvider {
                 // 카카오톡
                 //const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}&projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}&paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}&param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
 
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=${encodeURIComponent(notification.biztalkTemplateCode)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
 
                 console.log("up======" + url);
 
