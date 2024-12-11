@@ -99,17 +99,11 @@ class Kakao extends NotificationProvider {
                 //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
                 
                 // 카카오톡
-                const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}
-                &projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}
-                &paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}
-                &param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
+                //const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}&projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}&paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}&param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
 
-                // const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
-                //          &projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130659&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
-                //          &paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
-                //          &param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(errorMsg)}`;
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130659&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(errorMsg)}`;
                 
-                         console.log("down======" + url);
+                console.log("down======" + url);
                 const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
@@ -165,18 +159,12 @@ class Kakao extends NotificationProvider {
                 
                 
                 // 카카오톡
-                const sanitize = (str) => str.replace(/[^\x20-\x7E]/g, ''); // ASCII 범위만 허용
+                //const sanitize = (str) => str.replace(/[^\x20-\x7E]/g, ''); // ASCII 범위만 허용
       
                 // 카카오톡
-                const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}
-                &projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}
-                &paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}
-                &param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
+                //const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}&projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}&paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}&param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
 
-                // const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
-                //          &projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
-                //          &paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
-                //          &param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
 
                 console.log("up======" + url);
 
