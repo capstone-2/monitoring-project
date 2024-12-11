@@ -18,18 +18,20 @@ class Kakao extends NotificationProvider {
 
             const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(smsMsg)}`;
 
-            if (heartbeatJSON !== null) {
-                
-                const kakaotestdata = await axios.get(url, {
+            if (heartbeatJSON == null) {
+                const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
                     },
                     timeout: 5000, // 5초 제한
                 });
-                return kakaotestdata.data;
+                return response.data;
             }
-
+            console.log("=====================33333333333333333");
+            console.log("heartbeatJSON===========" + JSON.stringify(heartbeatJSON, null, 2));
             let address;
+
+            console.log("monitorJSON===========" + JSON.stringify(monitorJSON, null, 2));
 
             switch (monitorJSON["type"]) {
                 case "ping":
@@ -51,6 +53,7 @@ class Kakao extends NotificationProvider {
 
             // If heartbeatJSON is not null, we go into the normal alerting loop.
             if (heartbeatJSON["status"] === DOWN) {
+                console.log("상태 downdowndowndowndown================");
                 let kakaodowndata = {
                     username: notification.name,
                     embeds: [{
@@ -77,17 +80,19 @@ class Kakao extends NotificationProvider {
                         ],
                     }],
                 };
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(kakaodowndata)}`;
-                console.log("kakaodowndata=========="+url);
-                kakaodowndata = await axios.get(url, {
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
+                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(JSON.stringify(kakaodowndata))}`;
+                console.log("url======"+url);
+                const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    timeout: 5000, // 5초 제한
+                    timeout: 10000, // 5초 제한
                 });
-                return kakaodowndata.data;
+                return response.data;
 
             } else if (heartbeatJSON["status"] === UP) {
+                console.log("상태 upupupupupupp================");
                 let kakaoupdata = {
                     username: notification.name,
                     embeds: [{
@@ -114,15 +119,17 @@ class Kakao extends NotificationProvider {
                         ],
                     }],
                 };
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(kakaoupdata)}`;
-                console.log("kakaoupdata=========="+url);
-                kakaoupdata = await axios.get(url, {
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(okMsg)}`;
+                
+                //const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${eencodeURIComponent(JSON.stringify(kakaoupdata))}`;
+                console.log("url======"+url);
+                const response = await axios.get(url, {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    timeout: 5000, // 5초 제한
+                    timeout: 10000, // 5초 제한
                 });
-                return kakaoupdata.data;
+                return response.data;
             }
         } catch (error) {
             console.error("[Kakao Notification Error]:", error.message || error.response?.data);
