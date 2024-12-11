@@ -84,7 +84,9 @@ class Kakao extends NotificationProvider {
                 //     }],
                 // };
 
-                let title= "❌ Your service " + monitorJSON["name"] + " went down. ❌";
+                let title = 'TalkTest';
+                let content = 'Talk';
+                let msgTitle= "❌ Your service " + monitorJSON["name"] + " went down. ❌";
                 let serviceName= monitorJSON["name"];
                 let serviceType = monitorJSON["type"] === "push" ? "Service Type" : "Service URL";
                 let Address= address;
@@ -98,9 +100,9 @@ class Kakao extends NotificationProvider {
                 
                 
                 // 카카오톡
-                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&title=TalkTest&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
-                         &projectId=${encodeURIComponent(notification.biztalkProjectId)}&tmplCode=AT_20241211130659&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
-                         &param1=${encodeURIComponent(title)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
+                const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
+                         &projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130659&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
+                         &paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
                          &param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(errorMsg)}`;
                 
                          console.log("down======" + url);
@@ -141,7 +143,9 @@ class Kakao extends NotificationProvider {
                 //     }],
                 // };
 
-                let title= "✅ Your service " + monitorJSON["name"] + " is up! ✅";
+                let title = 'TalkTest';
+                let content = 'Talk';
+                let msgTitle= "✅ Your service " + monitorJSON["name"] + " is up! ✅";
                 let serviceName= monitorJSON["name"];
                 let serviceType = monitorJSON["type"] === "push" ? "Service Type" : "Service URL";
                 let Address= address;
@@ -156,8 +160,8 @@ class Kakao extends NotificationProvider {
                 
                 // 카카오톡
                 const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}
-                         &projectId=${encodeURIComponent(notification.biztalkProjectId)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
-                         &param1=${encodeURIComponent(title)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
+                         &projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}
+                         &paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}
                          &param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
 
                 console.log("up======" + url);
