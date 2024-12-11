@@ -23,7 +23,7 @@ class Discord extends NotificationProvider {
             }
 
             let address;
-
+                    console.log("monitorJSON===========" + JSON.stringify(monitorJSON, null, 2));
             switch (monitorJSON["type"]) {
                 case "ping":
                     address = monitorJSON["hostname"];

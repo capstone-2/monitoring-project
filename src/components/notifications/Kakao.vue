@@ -10,7 +10,5 @@
         <input id="biztalk-sender-no" v-model="$parent.notification.biztalkSenderNo" type="text" class="form-control" required>
         <label for="biztalk-system-key" class="form-label">{{ $t("biztalkSystemKey") }}</label>
         <input id="biztalk-system-key" v-model="$parent.notification.biztalkSystemKey" type="text" class="form-control" required>
-        <label for="biztalk-template-code" class="form-label">{{ $t("biztalkTemplateCode") }}</label>
-        <input id="biztalk-template-code" v-model="$parent.notification.biztalkTemplateCode" type="text" class="form-control" placeholder="critical" required>
     </div>
 </template>
