@@ -10,11 +10,10 @@ monitoring-testing-job:
     - hostname -I
       # build 에서 clone 받은 reposiroty의 프로젝트 경로로 이동
     - cd cloud-monitoring
-
-    # - ls -al
-    - pm2 stop cloud-monitoring
-    - pm2 start server/server.js --name cloud-monitoring
-    - pm2 save
+    - ls -al
+    #- pm2 stop cloud-monitoring
+    #- pm2 start server/server.js --name cloud-monitoring
+    #- pm2 save
       # README.md 파일 출력 대신 TESTNG 작업을 작성
     - echo $JOB_END
   only:
