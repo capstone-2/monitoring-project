@@ -3,7 +3,7 @@
 *.local
 .idea
 
-data/kuma.db
+/data
 !/data/.gitkeep
 .vscode
 

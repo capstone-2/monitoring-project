@@ -12,7 +12,7 @@ class Kakao extends NotificationProvider {
         // 문자
         // const baseUrl = "http://10.100.21.128:17878/sendSms";
         
-        // 카카오톡
+        // 카카오톡 
         const baseUrl = "http://10.100.21.128:17878/sendKakao";
         
         try {
