@@ -14,6 +14,7 @@ class Discord extends NotificationProvider {
 
             // If heartbeatJSON is null, assume we're testing.
             if (heartbeatJSON == null) {
+                console.log("heartbeatJSON nullnullnullnullnullnullnullnull");
                 let discordtestdata = {
                     username: discordDisplayName,
                     content: msg,
@@ -23,7 +24,8 @@ class Discord extends NotificationProvider {
             }
 
             let address;
-                    console.log("monitorJSON===========" + JSON.stringify(monitorJSON, null, 2));
+            console.log("discorddiscorddiscorddiscord");
+            console.log("monitorJSON===========" + JSON.stringify(monitorJSON, null, 2));
             switch (monitorJSON["type"]) {
                 case "ping":
                     address = monitorJSON["hostname"];

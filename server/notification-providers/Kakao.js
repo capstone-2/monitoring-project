@@ -1,7 +1,6 @@
-const NotificationProvider = require("./notification-provider");
-const axios = require("axios");
-const { DOWN, UP } = require("../../src/util");
-
+const NotificationProvider = require("./notification-provider"); // 알림제공 기능을 정의하는 클래스
+const axios = require("axios");  // http 요청 라이브러리
+const { DOWN, UP } = require("../../src/util"); // util 파일에서 정의되어 있는 down, up 상수
 
 class Kakao extends NotificationProvider {
     name = "Kakao";
@@ -12,29 +11,35 @@ class Kakao extends NotificationProvider {
         // 문자
         // const baseUrl = "http://10.100.21.128:17878/sendSms";
         
-        // 카카오톡 
-        const baseUrl = "http://10.100.21.128:17878/sendKakao";
+        // 카카오톡 - k-ecp 인터넷망 
+         const baseUrl = "http://10.100.21.128:17878/sendKakao";
+
+        // 카카오톡 - 사외 인터넷망
+        // const baseUrl = "https://kecp-biztalk.kdn.com:14343/sendKakao";
+
         
         try {
+            console.log("==================" + notification);
+            console.log("==================msg" + msg);
 
-            const smsMsg = `${msg}`;
-
-            const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(smsMsg)}`;
-
-            if (heartbeatJSON == null) {
-                const response = await axios.get(url, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    timeout: 5000, // 5초 제한
-                });
-                return response.data;
-            }
+            // const smsMsg = `${msg}`;
+            // const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&content=${encodeURIComponent(smsMsg)}`;
+            // if (heartbeatJSON == null) {
+            //     console.log("heartbeatJSON nullnullnullnullnullnullnullnull");
+            //     const response = await axios.get(url, {
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //         timeout: 5000, // 5초 제한
+            //     });
+            //     console.log("heartbeatJSON ResponseResponseResponse" + response);
+            //     return response.data;
+            // }
 
             console.log("heartbeatJSON===========" + JSON.stringify(heartbeatJSON, null, 2));
-            let address;
-
             console.log("monitorJSON===========" + JSON.stringify(monitorJSON, null, 2));
+
+            let address;
 
             switch (monitorJSON["type"]) {
                 case "ping":
@@ -53,7 +58,7 @@ class Kakao extends NotificationProvider {
                     address = monitorJSON["url"];
                     break;
             }
-
+            
             // If heartbeatJSON is not null, we go into the normal alerting loop.
             if (heartbeatJSON["status"] === DOWN) {
                 console.log("상태 downdowndowndowndown================");
@@ -109,8 +114,6 @@ class Kakao extends NotificationProvider {
                 //const url = `${baseUrl}?sendNo=${notification.biztalkSenderNo}&callBackNo=${notification.biztalkCallBackNo}&projectId=${notification.biztalkProjectId}&title=${sanitize(title)}&content=${sanitize(content)}&tmplCode=AT_20241211130812&systemKey=${notification.biztalkSystemKey}&paramNum=7&param1=${sanitize(msgTitle)}&param2=${sanitize(serviceName)}&param3=${sanitize(serviceType)}&param4=${sanitize(Address)}&param5=${sanitize(timezone)}&param6=${sanitize(time)}&param7=${sanitize(errorMsg)}`;
 
                 const url = `${baseUrl}?sendNo=${encodeURIComponent(notification.biztalkSenderNo)}&callBackNo=${encodeURIComponent(notification.biztalkCallBackNo)}&projectId=${encodeURIComponent(notification.biztalkProjectId)}&title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}&tmplCode=AT_20241211130812&systemKey=${encodeURIComponent(notification.biztalkSystemKey)}&paramNum=7&param1=${encodeURIComponent(msgTitle)}&param2=${encodeURIComponent(serviceName)}&param3=${encodeURIComponent(serviceType)}&param4=${encodeURIComponent(Address)}&param5=${encodeURIComponent(timezone)}&param6=${encodeURIComponent(time)}&param7=${encodeURIComponent(passMsg)}`;
-
-                console.log("up======" + url);
 
                 const response = await axios.get(url, {
                     headers: {

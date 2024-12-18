@@ -16,6 +16,6 @@ monitoring-deploy-job:
     # 10.100.22.34 서버에 설치된 project-runner의 tag명
     - monitoring-cicd
   only:
-    # main branch에 변화가 생길때 실행되는 job
+    # main branch에 변화가 생길때 해당 job을 실행
     # (pipline 구조상, test-ok job이 실행되어 dev -> main Merge Request가 실행되면 수행됨)
     - main
