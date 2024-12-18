@@ -86,7 +86,7 @@ class Kakao extends NotificationProvider {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    timeout: 10000, // 5초 제한
+                    timeout: 10000, // 5초 제한 //
                 });
                 return response.data;
 
