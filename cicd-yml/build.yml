@@ -8,7 +8,7 @@ monitoring-build-job:
   script:
     - git status
     # 기존의 repository를 삭제
-    - cp /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/cloud-monitoring/cloud-monitoring/data/kuma.db kuma.db-wal kuma.db-shm /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/data_backup
+    - cp /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/cloud-monitoring/cloud-monitoring/data/kuma.db* /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/data_backup
     - rm -rf cloud-monitoring
     # dev 브랜치를 clone 받음
     - git clone --branch dev http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
