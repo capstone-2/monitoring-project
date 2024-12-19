@@ -12,7 +12,7 @@ monitoring-build-job:
     - rm -rf cloud-monitoring
     # dev 브랜치를 clone 받음
     - git clone --branch dev http://10.99.2.66:19494/KIMSOL/cloud-monitoring.git
-    - cp /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/data_backup /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/cloud-monitoring/cloud-monitoring/data 
+    - cp /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/data_backup/* /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/cloud-monitoring/cloud-monitoring/data 
     - echo $JOB_START
     - hostname -I
     - ls -al
