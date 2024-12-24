@@ -6,6 +6,7 @@ monitoring-build-job:
     # (러너가 인터넷망에 설치되어 있어 gitlab repository의 url이 다름)
     GIT_STRATEGY: none
   script:
+    - pwd
     - git status
     # 기존의 repository를 삭제
     - cp /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/cloud-monitoring/cloud-monitoring/data/kuma.db* /home/kecpadmin/builds/sHD_DKWBv/0/KIMSOL/data_backup

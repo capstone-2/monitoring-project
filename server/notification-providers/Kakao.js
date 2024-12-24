@@ -12,10 +12,10 @@ class Kakao extends NotificationProvider {
         // const baseUrl = "http://10.100.21.128:17878/sendSms";
         
         // 카카오톡 - k-ecp 인터넷망 
-         const baseUrl = "http://10.100.21.128:17878/sendKakao";
+        // const baseUrl = "http://10.100.21.128:17878/sendKakao";
 
         // 카카오톡 - 사외 인터넷망
-        // const baseUrl = "https://kecp-biztalk.kdn.com:14343/sendKakao";
+         const baseUrl = "https://kecp-biztalk.kdn.com:14343/sendKakao";
 
         
         try {

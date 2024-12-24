@@ -102,6 +102,11 @@ class Database {
     static init(args) {
         // Data Directory (must be end with "/")
         Database.dataDir = process.env.DATA_DIR || args["data-dir"] || "./data/";
+        // Database.dataDir = process.env.DATA_DIR || args["data-dir"] || "D:/MSP/data";
+        
+        // console.log("init=================="+ Database.dataDir);
+        // console.log("init=================="+ process.env.DATA_DIR);
+        // console.log("init=================="+ args["data-dir"]);
 
         Database.path = path.join(Database.dataDir, "kuma.db");
         if (! fs.existsSync(Database.dataDir)) {
